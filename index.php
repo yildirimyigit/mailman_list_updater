@@ -30,10 +30,10 @@ $output = shell_exec("python " .$command);
                     <tr>
                         <td style="text-align: left; vertical-align: middle;">&nbsp;<b>List</b>:</td>
                         <td>
-                            <select>
+                            <select name="list" id="list" required>
                                 <option selected="selected">Choose a list</option>
                                 <?php
-                                $lists =["a","b","c"];  // just for the local setup
+                                $lists =["a","b","c"];  // TODO: delete, this is just for the local setup
                                 foreach($lists as $item){
                                 ?>
                                 <option value="<?php echo strtolower($item); ?>"><?php echo $item; ?></option>
