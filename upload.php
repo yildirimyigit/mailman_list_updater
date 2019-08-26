@@ -10,8 +10,6 @@ function findCol($sheet){
     $mailRowStart = -1;
     $lastRow = $sheet->getHighestRow();
     $lastCol = min(PHPExcel_Cell::columnIndexFromString($sheet->getHighestColumn()), 100);
-    echo $lastRow ."\n";
-    echo $lastCol ."\n";
     for($i = 0; $i < $lastCol; $i++) {  //col starts from 0
         for ($j = 1; $j <= $lastRow; $j++) {    //row starts from 1 and first 2 rows are for the headers
             $data = $sheet->getCellByColumnAndRow($i, $j)->getValue();
@@ -69,12 +67,13 @@ if ($uploadOk == 0) {
         if($mailCol < 0)
             die("Email column not found!");
         else{
-            print_r($mails);
+            $listName = $_POST['list'];
+            echo $listName."\n\n";
+            foreach ($mails as $mail)
+                echo $mail."\n";
         }
+        rename($targetFile, 'uploads/archive/'.date('Ymd-His'));
 
-        $listName = $_POST['list'];
-        rename($targetFile, 'uploads/archive/'.date('YmdHis'));
-        echo "\n".$listName;
     }
     else{
         echo "Sorry, there was an error uploading your file.";
