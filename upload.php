@@ -68,11 +68,11 @@ if ($uploadOk == 0) {
             die("Email column not found!");
         else{
             $listName = $_POST['list'];
-            echo $listName."\n\n";
+            echo $listName."<br>---<br><br>";
             foreach ($mails as $mail)
-                echo $mail."\n";
+                echo $mail."<br>";
         }
-        rename($targetFile, 'uploads/archive/'.date('Ymd-His'));
+        rename($targetFile, 'uploads/archive/'.$listName."-".date('Ymd-His'));
 
     }
     else{
