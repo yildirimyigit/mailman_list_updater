@@ -9,11 +9,11 @@ function findCol($sheet){
     $col = -1;
     $mailRowStart = -1;
     $lastRow = $sheet->getHighestRow();
-    $lastCol = min(PHPExcel_Cell::columnIndexFromString($sheet->getHighestColumn()), 100);
+    $lastCol = min(PHPExcel_Cell::columnIndexFromString($sheet->getHighestColumn()), 100); //highestColumn() returns interesting numbers. 100 is just a fine limit.
     for($i = 0; $i < $lastCol; $i++) {  //col starts from 0
         for ($j = 1; $j <= $lastRow; $j++) {    //row starts from 1 and first 2 rows are for the headers
             $data = $sheet->getCellByColumnAndRow($i, $j)->getValue();
-            if (filter_var($data, FILTER_VALIDATE_EMAIL)){
+            if (filter_var($data, FILTER_VALIDATE_EMAIL)){  // found the column of mail addresses
                 $col = $i;
                 $mailRowStart = $j;
                 break;
@@ -59,7 +59,7 @@ if ($uploadOk == 0) {
         $mailCol = -1;
         foreach ($xlObj->getAllSheets() as $sheet){
             list($mailCol, $mailrs, $mailre) = findCol($sheet);
-            if($mailCol >= 0){
+            if($mailCol >= 0){  // appropriate sheet, extract mails
                 $mails = extractMailAddresses($sheet,$mailCol, $mailrs, $mailre);
                 break;
             }
@@ -71,7 +71,9 @@ if ($uploadOk == 0) {
             echo $listName."<br>---<br><br>";
             foreach ($mails as $mail)
                 echo $mail."<br>";
+            // TODO: write to file and call ./add_members -r list file
         }
+        // archive the xlsx
         rename($targetFile, 'uploads/archive/'.$listName."-".date('Ymd-His'));
 
     }
