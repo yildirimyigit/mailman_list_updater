@@ -3,6 +3,11 @@
  *** author: yigit.yildirim@boun.edu.tr
  ***************************************/
 
+session_start();
+if(!isset($_SESSION['login'])) {
+    header('LOCATION:index.php'); die();
+}
+
 require_once "Classes/PHPExcel.php";
 
 function findCol($sheet){
