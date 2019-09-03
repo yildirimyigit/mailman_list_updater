@@ -36,7 +36,7 @@ $output = shell_exec("python " .$command);
                         <td style="text-align: left; vertical-align: middle;">&nbsp;<b>List</b>:</td>
                         <td>
                             <select name="list" id="list" required>
-                                <option selected="selected">Choose a list</option>
+                                <option value="">Choose a list</option>
                                 <?php
                                 $lists =["a","b","c"];  // TODO: delete, this is just for the local setup
                                 foreach($lists as $item){
@@ -50,7 +50,7 @@ $output = shell_exec("python " .$command);
                     </tr>
                     <tr>
                         <td style="text-align: left; vertical-align: middle;">&nbsp;<b>Upload</b>:</td>
-                        <td><input type="file" name="fileToUpload" id="fileToUpload"></td>
+                        <td><input type="file" name="fileToUpload" id="fileToUpload" required></td>
                     </tr>
                 </tbody>
             </table>
